@@ -7,13 +7,39 @@ from django.db import models
 class User(AbstractUser):
     username = None
 
-    email = models.EmailField(unique=True, verbose_name="Почта", help_text="Укажите почту")
-    phone = models.CharField(max_length=35, verbose_name="Телефон", blank=True, null=True,
-                             help_text="Введите номер телефона")
-    town = models.CharField(max_length=50, verbose_name="Город", blank=True, null=True,
-                            help_text="Введите город")
-    avatar = models.ImageField(upload_to="users/avatars/", verbose_name="Аватар", blank=True, null=True,
-                               help_text="Загрузите свой аватар")
+    email = models.EmailField(
+        unique=True,
+        verbose_name="Почта",
+        help_text="Укажите почту"
+    )
+    phone = models.CharField(
+        max_length=35,
+        verbose_name="Телефон",
+        blank=True,
+        null=True,
+        help_text="Введите номер телефона"
+    )
+    town = models.CharField(
+        max_length=50,
+        verbose_name="Город",
+        blank=True,
+        null=True,
+        help_text="Введите город"
+    )
+    avatar = models.ImageField(
+        upload_to="users/avatars/",
+        verbose_name="Аватар",
+        blank=True,
+        null=True,
+        help_text="Загрузите свой аватар"
+    )
+    tg_chat_id = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name="Телеграм chat-id",
+        help_text="Укажите телеграм chat-id"
+    )
 
     USERNAME_FIELD = "email"  # меняем юзернейм на почту
     REQUIRED_FIELDS = []
