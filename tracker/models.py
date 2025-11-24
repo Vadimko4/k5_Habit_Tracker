@@ -6,6 +6,10 @@ from django.db import models
 
 
 class Habit(models.Model):
+    name = models.CharField(
+        max_length=200,
+        verbose_name='Название привычки'
+    )
     owner = models.ForeignKey(
         'users.User',
         on_delete=models.CASCADE,
@@ -58,6 +62,11 @@ class Habit(models.Model):
         verbose_name='Вознаграждение',
         help_text='Чем себя вознаградить после выполнения'
     )
+    is_public = models.BooleanField(
+        default=False,
+        verbose_name='Можно смотреть всем',
+        help_text='Укажите, можно ли показывать данную привычку всем'
+    )
 
     class Meta:
         verbose_name = 'Привычка'
@@ -65,7 +74,7 @@ class Habit(models.Model):
         ordering = ['execution_time']
 
     def __str__(self):
-        return f"{self.action} в {self.execution_time.strftime('%H:%M')}"
+        return f"{self.name} в {self.execution_time.strftime('%H:%M')}"
 
     def clean(self):
         errors = {}
